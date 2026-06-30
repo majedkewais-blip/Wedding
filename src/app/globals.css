@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+
+html { scroll-behavior: smooth; }
+body {
+  background:
+    radial-gradient(120% 80% at 50% -10%, #FBF7EF 0%, #F8F2E7 45%, #EFE3CC 100%) fixed;
+  color: #4A4334;
+  font-family: var(--font-serif), Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* dark mode (toggled via .dark on <html>) */
+html.dark body {
+  background: radial-gradient(120% 80% at 50% -10%, #15201A 0%, #101813 50%, #0B110D 100%) fixed;
+  color: #E8E0CF;
+}
+
+@layer components {
+  .glass {
+    @apply backdrop-blur-md bg-white/55 border border-white/60 shadow-[0_18px_50px_-26px_rgba(70,55,30,0.5)];
+  }
+  html.dark .glass { @apply bg-white/5 border-white/10; }
+
+  .eyebrow {
+    @apply uppercase tracking-[0.34em] text-[0.72rem] md:text-xs font-medium text-inksoft;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3
+           uppercase tracking-[0.16em] text-xs font-medium transition-all duration-300;
+  }
+  .btn-primary { @apply bg-forest text-ivory hover:bg-forest2 shadow-lg shadow-forest/20; }
+  .btn-ghost   { @apply border border-gold/70 text-forest hover:bg-gold/10; }
+  html.dark .btn-ghost { @apply text-goldsoft border-goldsoft/50 hover:bg-goldsoft/10; }
+  .field {
+    @apply w-full rounded-xl border border-gold/30 bg-white/80 px-4 py-3 text-ink
+           outline-none transition focus:border-gold focus:ring-4 focus:ring-gold/15;
+  }
+  html.dark .field { @apply bg-white/5 text-warmwhite border-white/15; }
+  .hairline { @apply h-px w-16 bg-gradient-to-r from-transparent via-gold to-transparent; }
+}
+
+/* gentle entrance for reduced-motion safety handled in components */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
